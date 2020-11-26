@@ -20,9 +20,10 @@ defmodule CheckerWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", CheckerWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", CheckerWeb do
+    pipe_through :api
+    post "/sample/person", PersonController, :create
+  end
 
   # Enables LiveDashboard only for development
   #
