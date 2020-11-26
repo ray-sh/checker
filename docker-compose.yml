@@ -1,0 +1,42 @@
+version: "3"
+services:
+  phx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: ecto://postgres:410f528114ec6a30@postgresdb/checker_prod
+      SECRET_KEY_BASE: MXqrmkca+nr3fnAuwie1VLY9rPI/owmBALKZCf9PVlPp3LLr77986Uv0RFxx2JzC
+    ports:
+      - "4000:4000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    networks:
+      - phx-network
+    depends_on:
+      - postgresdb
+
+  postgresdb:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: checker_prod
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 410f528114ec6a30
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    volumes:
+      - postgre-data:/var/lib/postgresql/data
+    networks:
+      - phx-network
+
+volumes:
+  postgre-data:
+networks:
+  phx-network:
+    driver: bridge
