@@ -23,6 +23,7 @@ defmodule CheckerWeb.Router do
   scope "/api/v1", CheckerWeb do
     pipe_through :api
     post "/sample/person", PersonController, :create
+    get "/sample/person", PersonController, :index
   end
 
   # Enables LiveDashboard only for development

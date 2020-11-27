@@ -7,8 +7,8 @@ defmodule CheckerWeb.PersonController do
   action_fallback CheckerWeb.FallbackController
 
   def index(conn, _params) do
-    person = Sample.list_person()
-    render(conn, "index.json", person: person)
+    person = %{name: "jack", age: 1, id: 1}
+    render(conn, "index.json", person: [person])
   end
 
   def create(conn, %{"person" => person_params}) do
